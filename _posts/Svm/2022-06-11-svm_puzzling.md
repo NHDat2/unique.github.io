@@ -40,7 +40,7 @@ Khi đó, ta có:
 \\[ WX + b = 1 ~~~~~~~~ X\in H1 \\]
 \\[ WX + b = -1 ~~~~~ X\in H2 \\]
 
-<img class="singleImg" src="../../Data/Pictures/Svm/13.png">
+<img class="singleImg" src="/Assets/Pictures/Svm/13.png">
 <p class="textSingleImg">Hình 1: Siêu phẳng phân tách H0 và 2 siêu phẳng biên H1, H2 </p>
 
 giả sử, xét trong không gian 2 chiều và ta tìm được 3 phương trình đường thẳng tương ứng cho H0, H1, H2 là:
@@ -59,7 +59,7 @@ Do vậy, Đơn giản siêu phẳng H1, H2 được tạo ra bằng cách sử 
 
 Gọi \[ X_{u} \] là điểm nằm trên H1 và \[ X_{k} \] là điểm nằm trên H2.Khi đó, khoảng cách từ các điểm chạm từ các đường biên H1 và H2 tới H0 lần lượt sẽ là $m_{1}$ và $m_{2}$ và margin $M = m_{1} + m_{2}$
 
-<img class="singleImg" src="../../Data/Pictures/Svm/15.png">
+<img class="singleImg" src="/Assets/Pictures/Svm/15.png">
 <p class="textSingleImg">Hình 2: Margin trong SVM</p>
 
 Vì \[ X_{u} \in H1, X_{k} \in H2 \], Do vậy:
