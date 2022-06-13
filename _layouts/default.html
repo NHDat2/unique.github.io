@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    Unique
+  </title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <div id="header">
+    <div id="blogTitle">
+      <a href="/"><img src="../Data/Layout/avatar_blog.png" /></a>
+      <p>Đéo nói nhiều, là mình đây và chỉ là mình thôi =))</p>
+      <div id="contact">
+        <a href="https://github.com/NHDat2"><img class="contactIcon" src="../Data/Layout/github_icon.png" /></a>
+        <a href="https://www.facebook.com/CS.NguyenHuuDat/"><img class="contactIcon"
+            src="../Data/Layout/fb_icon.png" /><a />
+      </div>
+    </div>
+  </div>
+  <div id="landingPage">
+    <div id="leftLanding">
+    </div>
+    <div id="centerLanding">
+      <div id="content">
+        {{ content }}
+      </div>
+    </div>
+    <div id="rightLanding">
+      <div id="searchBlock">
+        <p><b>Tìm kiếm</b></p>
+        <input id="searchBar" placeholder="Tìm kiếm" />
+      </div>
+      <div>
+        <img id="avaAboutMe" src="../Data/Layout/avatar.png" />
+        <br />
+        <a href="/about_me"><b>About Me</b></a>
+        <p>Chào mọi người, mình là <b>que</b> ..... bấm con mẹ nó vào mà đọc đi chần chờ cc gì nữa, sir :))</p>
+      </div>
+      <div class="historyPost">
+      </div>
+    </div>
+  </div>
+</body>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\[","\]"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+</html>
