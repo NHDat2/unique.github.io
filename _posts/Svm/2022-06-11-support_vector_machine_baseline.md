@@ -49,7 +49,7 @@ Trong phạm vi bài viết này, ta sẽ tập trung đi nhiều hơn vào SVC 
 
 # Ý tưởng chính của SVM
 
-<img src="/Assets/Pictures/Svm/1.png" class="singleImg">
+<img src="Assets/Pictures/Svm/1.png" class="singleImg">
 
 <p class="textSingleImg">Hình 1: Các điểm dữ liệu của bài toán<p>
 
@@ -59,13 +59,13 @@ Nhắc lại một chút, thì trong 1 không gian N chiều, 1 siêu phẳng l�
 
 Có thể thấy nếu ta coi hình trên là một không gian 2 chiều thì để phân tách được dữ liệu thành 2 phần có rất nhiều đường thẳng có thể làm được điều đó như hình 2. Khi đó ta sẽ chọn đường thẳng nào, đường thẳng nào sẽ là tốt nhất để phân tách các điểm dữ liệu.
 
-<img src="/Assets/Pictures/Svm/2.png" class="singleImg">
+<img src="Assets/Pictures/Svm/2.png" class="singleImg">
 
 <p class="textSingleImg">Hình  2: Vô số siêu phẳng (trong trường hợp này là đường thẳng) có thể phân chia dữ liệu thành 2 phần<p>
 
 Trong SVMs, một siêu phẳng (hyperplane) được coi là tốt khi có thể phân tách 2 miền của các điểm dữ liệu sao cho margin là lớn nhất.
 
-<img src="/Assets/Pictures/Svm/3.png" class="singleImg">
+<img src="Assets/Pictures/Svm/3.png" class="singleImg">
 
 <p class="textSingleImg">Hình  3: Siêu phẳng tốt nhất để phân tách dữ liệu<p>
 
@@ -79,19 +79,19 @@ Như ở trên đã đề cập, ta đã đi qua ý tưởng chính của thuậ
 
 Có thể thấy trường hợp mà chúng ta đã đi qua ở trên là dữ liệu có thể phân tách tuyến tính và điểm dữ liệu thuộc các ljkkớp khác nhau nằm khá xa nhau. Vậy thì khi dữ liệu không thể phân tách tuyến tính hay có các điểm dữ liệu nhiễu nằm gần nhau như Hình 4 và Hình 5 thì sao ?
 
-<img src="/Assets/Pictures/Svm/5.png" class="singleImg">
+<img src="Assets/Pictures/Svm/5.png" class="singleImg">
 
 <p class="textSingleImg">Hình  4: Có các điểm dữ liệu nhiễu nằm gần class khác hơn bình thường<p>
 
-<img src="/Assets/Pictures/Svm/9.png" class="singleImg">
+<img src="Assets/Pictures/Svm/9.png" class="singleImg">
 
 <p class="textSingleImg">Hình  5: Dữ liệu gần tuyến tính, có một số các điểm dữ liệu nhiễu nằm ở nhầm class<p>
 
 Về cơ bản để có thể giải quyết được các bài toán trên, svm chấp nhận việc hy sinh một vài điểm dữ liệu để có thể tạo ra một hyperplane nơi có margin lớn hơn và tổng quát hơn. Và khi đó các đường nét đứt tạo thành margin cùng với hyperplane gọi là soft margin và trong phạm vi margin của mỗi class được gọi là vùng không an toàn của class đó.
 
 <div class="twoImgBlock">
-    <img class="twoImg" src="/Assets/Pictures/Svm/6.png" />
-    <img class="twoImg" src="/Assets/Pictures/Svm/8.png" />
+    <img class="twoImg" src="Assets/Pictures/Svm/6.png" />
+    <img class="twoImg" src="Assets/Pictures/Svm/8.png" />
 </div>
 
 <!-- <div class="textTwoImg"> -->
@@ -112,12 +112,12 @@ Nhìn lại các lý thuyết cũng như những vấn đề mà chúng ta đã 
 
 <br/>
 <br/>
-<img src="/Assets/Pictures/Svm/10.png" class="twoImg">
-<img src="/Assets/Pictures/Svm/11.png" class="twoImg">
+<img src="Assets/Pictures/Svm/10.png" class="twoImg">
+<img src="Assets/Pictures/Svm/11.png" class="twoImg">
 <!-- <p class="textSingleImg">Hình  8<p> -->
 <!-- <p class="textSingleImg">Hình  9<p> -->
 <br/>
-<img src="/Assets/Pictures/Svm/12.png" class="singleImg">
+<img src="Assets/Pictures/Svm/12.png" class="singleImg">
 <p class="textSingleImg">Hình 10: Cách thức SVM xử lý khi dữ liệu không tuyến tính<p><br/>
 
 <h1> Tài Liệu Tham Khảo</h1>
