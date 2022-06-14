@@ -1,9 +1,66 @@
 ---
 layout: default
 ---
+
+<style>
+  h1 {
+    font-family: "Monospace";
+    font-size: 40px;
+    max-width: 700px;
+  }
+
+  hr {
+    max-width: 700px;
+    margin-left: 0px;
+    color: white
+  }
+
+  #textExcerpt {
+    max-width: 700px;
+    margin-left: 0px;
+    line-height: 30px;
+    font-family: "Cursive";
+    font-size: 20px;
+  }
+
+  #tagBlock {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  #tag {
+    font-size: 14px;
+    font-family: "Monospace";
+    margin-top: 3px;
+    margin-right: 10px;
+  }
+
+  #contentTag {
+    font-size: 14px;
+    font-family: "Monospace";
+    margin-top: 3px;
+    margin-right: 10px;
+  }
+
+  #tagIcon {
+    width: 20px;
+    height: 20px;
+  }
+</style>
+
 {% for post in site.posts %}
 <div class="post">
-  <h3><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h3>
+  <h1><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h1>
+  <p id="textExcerpt"> {{ post.excerpt }} </p>
+  <a href="{{ post.url | prepend: site.baseurl }}"><strong>Read More</strong></a>
+  <div id="tagBlock">
+    <img id="tagIcon" src="Assets/Layout/tag_icon.png" />
+    <p id="tag"> Tags: </p>
+    {% for tag in post.tags %}
+    <p id="contentTag">{{ tag }} | </p>
+    {% endfor %}
+  </div>
   <hr />
 </div>
 {% endfor %}

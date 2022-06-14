@@ -1,6 +1,8 @@
 ---
 title: SVMs Và Những Thứ Hơi Khó Hiểu
 layout: default
+excerpt: Đã bao giờ bạn chạy một thuật toán hay một thư viện nào đó và kết quả trả về là một đống thứ mà bạn không hiểu nó là gì chưa, hay khi tìm hiểu thuật toán có những thứ nhỏ trong thuật toán mà ta vô tình bỏ qua dẫn tới không hiểu các thứ đằng sau nó vận hành? Cụ thể hơn ...
+tags: ["SVM"]
 ---
 
 <style>

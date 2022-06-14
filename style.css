@@ -1,12 +1,10 @@
-/* #header { */
-
-/* } */
 a {
   text-decoration: none;
 }
 
 #header {
-  margin-top: 50px;
+  margin-top: 100px;
+  margin-bottom: 60px;
 }
 
 #landingPage {
@@ -15,15 +13,19 @@ a {
 }
 
 #leftLanding {
-  width: 15%;
+  width: 30%;
 }
 
 #centerLanding {
-  width: 60%;
+  width: 45%;
 }
 
 #rightLanding {
   width: 25%;
+}
+
+#aboutmeBlock {
+  max-width: 300px;
 }
 
 #blogTitle {
@@ -33,6 +35,11 @@ a {
 #contact {
   display: flex;
   justify-content: center;
+}
+
+#subTitle {
+  font-size: 17px;
+  font-family: "Monospace";
 }
 
 .contactIcon {
@@ -52,5 +59,6 @@ a {
 }
 
 #searchBar {
-  border-radius: 7px;
+  height: 20px;
+  border-radius: 5px;
 }

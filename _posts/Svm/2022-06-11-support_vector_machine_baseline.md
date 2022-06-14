@@ -1,6 +1,8 @@
 ---
 title: Support Vector Machine
 layout: default
+excerpt: SVMs (aka support vector machines) là một thuật toán quan trọng thường đường nhắc đến trong machine learning. Nhưng đôi khi ta lại hoang mang khi tìm kiếm tài liệu về SVMs, có khi ta thấy ghi là SVMs có khi lại thấy SVM hay SVC và SVR, chúng là gì và có phải tất cả đều là support vector machine không ? Bài viết này ...
+tags: ["SVM"]
 ---
 
 <style>
