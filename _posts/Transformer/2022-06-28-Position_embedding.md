@@ -2,8 +2,26 @@
 title: Position Encoding
 layout: default
 excerpt: Trong kiến trúc Transformer, trước khi Vector Embedding được đưa vào mô hình Encoder, nó được cộng thêm một vector khác để lưu trữ lại vị trí của các từ trong câu, cơ chế này gọi là Positional Encoding (PE) ...
-tags: ["NLP", "Transformer", "Position Encoding"]
+tags: ["NLP", "Transformer", "Positional Encoding"]
 ---
+
+- [Giới Thiệu](#giới-thiệu)
+- [Positional Encoding](#positional-encoding)
+  - [Tại Sao Cần Có Positional Encoding ?](#tại-sao-cần-có-positional-encoding-)
+  - [Khái niệm](#khái-niệm)
+- [Cơ Chế Hoạt Động Của Positional Encoding](#cơ-chế-hoạt-động-của-positional-encoding)
+- [Tài Liệu Tham Khảo](#tài-liệu-tham-khảo)
+
+<style>
+  .img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .imgTitle {
+    text-align: center;
+  }
+</style>
 
 # Giới Thiệu
 
@@ -39,8 +57,8 @@ Giả sử, ta có câu đầu vào là **"tôi đi học"** và số chiều ch
 
 Ta có:
 
-<img src="Assets/Pictures/Transformer/PositionalEncoding/position_matrix.png"/>
-<p>Bảng 1</p>
+<img class="img" src="Assets/Pictures/Transformer/PositionalEncoding/position_matrix.png"/>
+<p class="imgTitle" >Bảng 1: Giá trị của từng token trên từng chiều của position vector</p>
 
 Thế thì, cái bảng ở trên có ý nghĩa gì, và nó liên quan gì tới việc lưu trữ thông tin vị trí trong câu.
 
@@ -48,9 +66,9 @@ Thế thì, cái bảng ở trên có ý nghĩa gì, và nó liên quan gì tớ
 
 Khi đó:
 
-<img src="Assets/Pictures/Transformer/PositionalEncoding/visualize_detail/viewdetail_1.png"/>
-<img src="Assets/Pictures/Transformer/PositionalEncoding/visualize_detail/viewdetail_2.png"/>
-<p>Hình 1</p>
+<img class="img" src="Assets/Pictures/Transformer/PositionalEncoding/visualize_detail/viewdetail_1.png"/>
+<img class="img" src="Assets/Pictures/Transformer/PositionalEncoding/visualize_detail/viewdetail_2.png"/>
+<p class="imgTitle">Hình 1: Tọa độ của các token trên đồ thị sinucoid theo các chiều trong position vector</p>
 
 
 Từ công thức (1) cũng như Hình 1. Có thể thấy, trong một position vector $d$ chiều, **$i$** sẽ tăng dần cho tới khi $d_{j} = d$ (tức $d_{j}$ là chiều cuối cùng của position vector như trong ví dụ trên thì $d_{j} = 15$) thì khi đó biểu thức $\frac{pos}{10000^{\frac{2i}{d}}}$ sẽ **giảm dần** mỗi khi **i tăng**, điều này cũng đồng nghĩa với việc chu kỳ lượng giác của mỗi đồ thị **sin** và **cos** tương ứng trong (1) sẽ ngày càng **lớn hơn**.
@@ -59,8 +77,8 @@ Như Hình 1, $d_{j} = 4,5$ có chu kỳ lớn hơn $d_{j} = 2,3$, và $d_{j} = 
 
 Khi $d_{j} = 12,13$ đồ thị sẽ có dạng:
 
-<img src="Assets/Pictures/Transformer/PositionalEncoding/visualize_detail/viewdetail_4.png">
-<p>Hình 2</p>
+<img class="img" src="Assets/Pictures/Transformer/PositionalEncoding/visualize_detail/viewdetail_4.png">
+<p class="imgTitle">Hình 2: Tọa độ của các token trên đồ thị sinucoid ở các chiều gần cuối trong position vector</p>
 
 Khi $d_{j}$ càng tiệm cận d, thì chu kỳ lượng giác lớn tới mức dường như các token ở các vị trí nhỏ sẽ gần như có giá trị bằng 0 đối với hàm sin và bằng 1 đối với hàm cos. Một token phải ở vị trí đủ lớn (tức là một từ nằm ở vị trí nào đó cực xa trong 1 câu cực dài, tuy nhiên điều này cũng sẽ phụ thuộc phần lớn nữa là vào số chiều của position vector có lớn hay không (tức d có lớn hay không)).
 
@@ -68,11 +86,16 @@ Những nhận định trên là những nhận định đóng góp cực kỳ q
 
 Ví dụ, như Hình 3 bên dưới, có $d = 15$, thì tại $d_{j} = 12, 13$, dường như các token nằm ở gần đầu câu như $t_{1},\ t_{4},\ t_{7}$ lúc này chỉ nhận được 0 và 1 và không nhận được giá trị nào khác nữa. Trong khi đó, các token ở xa hơn như $t_{18},\ t_{k}$ và xa nhất là $t_{n}$ các giá trị vẫn đang biến thiên thay vì nhận giá trị 0 và 1.
 
-<img src="Assets/Pictures/Transformer/PositionalEncoding/visualize_detail/viewdetail_5.png"/>
-<p>Hình 3</p>
+<img class="img" src="Assets/Pictures/Transformer/PositionalEncoding/visualize_detail/viewdetail_5.png"/>
+<p class="imgTitle">Hình 3: Visualize vị trí của các token trong một câu dài trên đồ thị sinucoid ở các chiều gần cuối</p>
 
 Có một số cách visualize để có cái nhìn tổng quan về sự biến thiên giá trị trong position vector, để dễ hiểu hơn cách thức lưu trữ giá trị của hàm sinocoid, dưới đây là một ví dụ:
 
-<img src="Assets/Pictures/Transformer/PositionalEncoding/overview_PE.png"/>
-<p>Hình 4: visualize position encoding d=128 với max_length_sentence=50 <a href="https://kazemnejad.com/blog/transformer_architecture_positional_encoding/">reference</a></p>
+<img class="img" src="Assets/Pictures/Transformer/PositionalEncoding/overview_PE.png"/>
+<p class="imgTitle">Hình 4: <a  href="https://kazemnejad.com/blog/transformer_architecture_positional_encoding/">Visualize position encoding d=128 với max_length_sentence=50</a></p>
 
+# Tài Liệu Tham Khảo
+
+[1] <a href="https://erdem.pl/2021/05/understanding-positional-encoding-in-transformers">Understanding Positional Encoding in Transformers - Kemal Erdem<a/>
+
+[2] <a href="https://arxiv.org/abs/1706.03762">Ashish Vaswani et al, “Attention Is All You Need”, NeurIPS 2017</a>
