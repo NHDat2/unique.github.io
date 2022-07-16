@@ -61,7 +61,7 @@ Trong bài báo gốc, self-attention được nhóm tác giả giới thiệu v
 ### Self-Attention
 #### Ma Trận Query, Key, Value (Q, K, V Matrix)
 
-Trên Hình , có thể thấy Q, K, V cũng là 3 tham số được giới thiệu trong self-attention. Vậy Q, K, V là gì và đóng vai trò như thế nào trong self-attention.
+Trên Hình 2, có thể thấy Q, K, V cũng là 3 tham số được giới thiệu trong self-attention. Vậy Q, K, V là gì và đóng vai trò như thế nào trong self-attention.
 
 Q, K, V là 3 vector đại diện biểu diễn cho từng token trong câu được tạo ra bằng cách nhân ma trận biểu diễn các token đầu vào với 3 ma trận học tương ứng là $W_{Q}\ W_{K}\ W_{V}$.
 
@@ -74,29 +74,28 @@ Trong đó:
 * **K**: Key vector dùng để biểu diễn thông tin so sánh giữa các token trong câu với token đang được query.
 * **V**: value vector biểu diễn nội dung của các token.
 
-Để dễ hình dung hơn, ta có thể coi Q, K, V như việc tìm kiếm sách trong thư viện. Giả sử trong thư viện có 10000 quyển sách tương ứng 10000 token thì self-attention khi áp dụng vào đây sẽ như thế nào. Với mỗi một quyển sách ta sẽ có 3 vector Q, K, V ứng với đó là 3 ma trận trọng số $W_{Q}\ W_{K}\ W_{V}$. Thì khi nhìn vào một quyển sách làm sao để thủ thư có thể tìm được quyển sác đó trong thư viện.
+Để dễ hiểu hơn, nếu câu đầu vào là **"tôi đi học"** với số chiều embedding là $d=100$ thì **Q, K, V** sẽ được biểu diễn dưới dạng ma trận có $(3 \times 100)$. Khi đó, ma trận $attention \\_ score = softmax(\frac{QK^{T}}{\sqrt[2]d_{k}})$ có thể được biểu diễn dưới dạng visulaize:
 
-* Thì việc đầu tiên thủ thư cần làm là nhìn vào đặc điểm của quyển sách cần tìm để xem nó màu gì, thể loại gì ..v.v. để có thể biết được nó nằm ở vị trí nào trong thư viện. Vì có rất nhiều sách được hỏi mượn thường xuyên cho nên thủ thư phải nhận biết được đặc điểm của nhiều quyển sách khác nhau, thì việc nhận biết được các đặc điểm đó của các quyển sách cần tìm chính là việc học ma trận $W_{Q}$
-* Sau khi có thông tin đặc điểm của quyển sách cần tìm thì thủ thư sẽ nhận định được rằng quyển sách đó sẽ nằm ở kệ nào hàng bao nhiêu, và chỉ tập trung tìm trong khu vực đó và không quan tâm nhiều tới các khu vực còn lại. Thì việc thủ thư nhận biết được từng khu vực khác nhau trong thư viện cũng cần một quá trình học tập và quá trình đó là quá trình học ma trận $W_{K}$
-* Và khi có khu vực tìm kiếm cụ thể thì thủ thư sẽ tìm kiếm trong khu đó và đưa ra quyển sách như mong muốn. Việc thủ thư đưa ra được quyển sách mong muốn cũng cần phải học để nhận biết được đâu là quyển sách mong muốn quá trình đó là quá trình học ma trận $W_{V}$.
+<img class="img" src="Assets/Pictures/Transformer/SelfAttention/attention_score.png">
+<p class="imgTitle">Hình 4: Visualize cách thức ma trận attention_score biểu diễn mối quan hệ giữa các token trong câu</p>
 
-Về mặt trực quan, K như kiểu là cầu nối giữa Q (cái ta đang tìm kiếm) và V (thứ chúng ta thực sự nhận được).
+Có thể thấy việc thực hiện $attention \\_ score = softmax(\frac{QK^{T}}{\sqrt[2]d_{k}})$ sẽ giúp cho mô hình có thể học được mối quan hệ của các từ trong câu, như ("tôi-tôi", "tôi-đi", "tôi-học", "đi-tôi", "đi-đi", "đi-học" ..v.v..). Tuy nhiên, với đó thì chưa đủ vì bản chất đó chỉ là học các mối liên hệ giữa các token trong câu nhưng không giữ được giá trị, ý nghĩa của cả câu ban đầu là **"tôi đi học"** mang giá trị gì. Thì khi đó **V** ở đây để giữ nguyên giá trị, ý nghĩa của câu đầu vào đó để kết hợp với attention_score và tạo thành một biểu thức self-attention hoàn chỉnh, thứ mà giúp model vừa có thể hiểu giá trị, ý nghĩa tổng quan của cả câu đầu vào vừa có thể hiểu mối quan hệ giữa các token trong câu với nhau.
 
 Khi đó, ta có công thức cho attention là:
 
-\\[ Attention(Q, K, V) = softmax(\frac{QK_{T}}{\sqrt[2]d_{k}})V \\]
+\\[ Attention(Q, K, V) = softmax(\frac{QK^{T}}{\sqrt[2]d_{k}})V \\]
 
-Đây được coi là hàm số để tính điểm cho attention, tham số $\sqrt[2]d_{k}$ xuất hiện ở đây với mục đích scale nhỏ lại bộ giá trị ở tử số trong hàm softmax. Nếu giá trị $QK_{T}$ là một vector lớn và không chia cho tham số $\sqrt[2]d_{k}$, thì khi đó với tính chất của hàm mũ trong hàm softmax là $\frac{e^{z_{i}}}{\sum_{j}^{nclass}e^{z_{j}}}$ thì input càng lớn sẽ càng khiến giá trị lớn nhất trong input tiến tới 1 và các giá trị còn lại tiến dần tới 0.
+Đây được coi là hàm số để tính điểm cho attention, tham số $\sqrt[2]d_{k}$ xuất hiện ở đây với mục đích scale nhỏ lại bộ giá trị ở tử số trong hàm softmax. Nếu giá trị $QK^{T}$ là một vector lớn và không chia cho tham số $\sqrt[2]d_{k}$, thì khi đó với tính chất của hàm mũ trong hàm softmax là $\frac{e^{z_{i}}}{\sum_{j}^{nclass}e^{z_{j}}}$ thì input càng lớn sẽ càng khiến giá trị lớn nhất trong input tiến tới 1 và các giá trị còn lại tiến dần tới 0.
 
 Ví dụ, nếu như ta có một hàm softmax cho 5 class với input bất kỳ, ta thực hiện scale từ nhỏ đến lớn thì khi đó đồ thị phân bố xác suất cho hàm softmax đó có dạng:
 <img class="img" src="Assets/Pictures/Transformer/SelfAttention/scale_input_softmax.png">
-<p class="imgTitle">Hình 4: Đồ thị phân bố xác suất của hàm softmax khi scale input</p>
+<p class="imgTitle">Hình 5: Đồ thị phân bố xác suất của hàm softmax khi scale input</p>
 Thì khi đó các class có giá trị sau khi đi qua hàm softmax tiến tới 0 khi train trong quá trình backpropagation sẽ xảy ra hiện tượng **vanishing gradient** và sẽ không đóng góp gì nhiều giá trị học trong quá trình train. Do vậy, nhóm tác giả thực hiện scale nhỏ lại input của hàm softmax bằng tham số $\sqrt[2]d_{k}$ để giúp cho các class khác mặc dù vẫn sẽ thấp nhưng không bị thấp quá.
 
 #### Tên Gọi Của Các Attention Khi Được Áp Dụng Tại Các Vị Trí Kháu Trong Transformer
 
 <img class="img" src="Assets/Pictures/Transformer/SelfAttention/sa_type.png">
-<p class="imgTitle">Hình 5: Tên gọi của các attention khi được áp dụng tại các vị trí khác nhau</p>
+<p class="imgTitle">Hình 6: Tên gọi của các attention khi được áp dụng tại các vị trí khác nhau</p>
 
 Về mặt bản chất các Attention trong Transformer có chung một cơ chế là Self-Attention như ở phần trước. Tuy Nhiên, khác với encoder và decoder attention nhận đầu vào là các represent vector của câu đầu vào được đi qua embedding layer và cộng với position vector, thì cross attention layer nhận đầu vào từ encoder và decoder để học mối quan hệ giữa 2 phần.
 
@@ -104,7 +103,7 @@ Về mặt bản chất các Attention trong Transformer có chung một cơ ch�
 #### Multi-Head Attention
 
 <img class="scaleImg" src="Assets/Pictures/Transformer/SelfAttention/sa_qkv_multi.png">
-<p class="imgTitle">Hình 6: Ma trận Q, K, V trong multi-head attention</p>
+<p class="imgTitle">Hình 7: Ma trận Q, K, V trong multi-head attention</p>
 
 
 Về cơ bản Multi-head attention có thể được định nghĩa là việc sử dụng nhiều lớp self-attention rồi nối chúng lại với nhau, sau đó nhân với một ma trận trọng số $W_{O}$
